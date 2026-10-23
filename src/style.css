@@ -61,3 +61,6 @@ details[open] summary{color:var(--green)}
 
 /* Keep longer FAQ answers easy to scan. */
 details p:not(:last-child){padding-bottom:12px}
+
+/* Separate the answer from the question and its keyboard focus ring. */
+details summary + p{padding-top:14px}

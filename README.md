@@ -13,6 +13,10 @@ Codex Netwatch 是 Codex 的本地网络活动监控，同时支持直连与代�
 同一采样不叠加 ETW 与代理计数。原生包括回环进程活动，目标显示 IP，不主动查询域名或收集通信正文。切换和丢事件留下缺口，历史可能包含不同统计口径，不补算离线流量。会话 GB、日志 token、网卡总流量和账单仍需区分。文案边界与依据见 [docs/NATIVE-CAPTURE.md](docs/NATIVE-CAPTURE.md)。
 
 
+## v0.3.2 同步
+
+网络记录支持在设置中调整保留天数（1–365 个整数天），下次成功采集时生效。缩短会清理旧记录和提醒，延长不能恢复已删除内容；会话日志 token 计数独立处理。时间菜单提供「最近 6 小时」，同时用于仪表盘与 CSV 导出。升级前退出程序、备份并保留 `data/` 与 `config.local.json`，原保留期限不会因升级自行改变。详见 [v0.3.2 更新说明](https://github.com/GloryPkqa/codex-netwatch/releases/tag/v0.3.2)。
+
 ## 本地运行
 
 需要 Node.js 22+，建议 Node.js 24 LTS。**没有第三方依赖，不需要安装步骤或 npm。**

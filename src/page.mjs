@@ -35,7 +35,7 @@ const copy = {
     ],
     "previewLabel": "01 / OVERVIEW",
     "previewTitle": "Your traffic. A clearer picture.",
-    "previewText": "Review upload and download activity over time. Choose a time range or export a CSV for a closer look. The screenshot shows an earlier Mihomo interface.",
+    "previewText": "Review upload and download activity over time. Choose a range such as “Last 6 hours”, or export that range as a CSV. The screenshot shows an earlier Mihomo interface.",
     "full": "View full-size image",
     "dashboardAlt": "Earlier Codex Netwatch Mihomo dashboard showing traffic history and process rankings; not a Windows native capture result",
     "featuresLabel": "02 / WHAT YOU CAN SEE",
@@ -64,7 +64,7 @@ const copy = {
     "demo": "EARLIER MIHOMO DEMO · SYNTHETIC DATA",
     "investigationAlt": "Earlier Mihomo investigation screen using synthetic data, not a Windows native capture result",
     "localTitle": "Your records stay on your computer.",
-    "localText": "Records and interface files are stored locally, with no usage telemetry. Use the desktop window or the local browser interface. Closing the window keeps collection running in the system tray; choose Exit from the tray menu to stop it. The interface supports English and Chinese and opens in English by default.",
+    "localText": "Records and interface files are stored locally, with no usage telemetry. Choose a retention period of 1–365 days in Settings. Use the desktop window or the local browser interface. Closing the window keeps collection running in the system tray; choose Exit from the tray menu to stop it. The interface supports English and Chinese and opens in English by default.",
     "stepsLabel": "03 / GET STARTED",
     "stepsTitle": "Get started in three steps.",
     "steps": [
@@ -131,6 +131,20 @@ const copy = {
         "No. Closing the window leaves Netwatch running in the system tray, along with any helper you have already authorized. Double-click the tray icon to reopen the window. To stop collection and end native authorization, choose Exit from the tray menu. Starting at sign-in is optional and off by default."
       ],
       [
+        "Can I choose how long to keep records?",
+        [
+          "In Settings → Data retention, enter a whole number from 1 to 365 days and save. Your choice is remembered across restarts and takes effect on the next successful collection, with no restart needed.",
+          "Shortening the period deletes older network records and alerts. Extending it cannot bring deleted data back. This setting does not affect token counts from session logs."
+        ]
+      ],
+      [
+        "How do I update without losing my records?",
+        [
+          "Exit Netwatch from the tray menu and back up data/ and config.local.json. Download and fully extract the new release, then replace the application files while keeping your existing data/ folder and config.local.json.",
+          "Updating does not change your existing retention period. To choose a different one, save a new value in Settings → Data retention."
+        ]
+      ],
+      [
         "Does Netwatch store or upload my chats?",
         [
           "Netwatch does not write chat messages, tool inputs or outputs, command lines or credentials to its database, and it sends no usage telemetry. Native capture records process network activity and destination IP addresses. It does not capture network payloads, decrypt TLS traffic or actively look up domain names.",
@@ -183,7 +197,7 @@ const copy = {
     ],
     "previewLabel": "01 / 界面预览",
     "previewTitle": "上传、下载和流量变化，一页看清。",
-    "previewText": "先看看上传、下载和历史曲线。想查某个时段，可以调整时间范围；需要进一步分析时，也能导出 CSV。",
+    "previewText": "先看看上传、下载和历史曲线。想查某个时段，可以选「最近 6 小时」等时间范围；导出 CSV 时也能用同样的筛选。",
     "full": "查看大图",
     "dashboardAlt": "Codex Netwatch 中文总览页，以合成数据展示流量趋势和进程排行；截图为旧版 Mihomo 代理采集界面",
     "featuresLabel": "02 / 主要功能",
@@ -212,7 +226,7 @@ const copy = {
     "demo": "旧版 Mihomo 排查界面 · 合成数据演示",
     "investigationAlt": "旧版 Mihomo 异常排查页，使用合成数据演示流量变化和连接记录，并非原生直连实测",
     "localTitle": "记录留在自己的电脑上。",
-    "localText": "数据和界面都在本机，不会上传使用数据。关掉窗口后，程序会留在托盘继续记录；要彻底停止，请从托盘菜单退出。界面支持中文和英文，首次启动默认英文。",
+    "localText": "数据和界面都在本机，不会上传使用数据。记录可保留 1–365 天，具体天数可以在设置里调整。关掉窗口后，程序会留在托盘继续记录；要彻底停止，请从托盘菜单退出。界面支持中文和英文，首次启动默认英文。",
     "stepsLabel": "03 / 开始使用",
     "stepsTitle": "第一次用，先做这三步。",
     "steps": [
@@ -273,6 +287,20 @@ const copy = {
         "会。关窗只是把程序收进系统托盘，记录还会继续，已经授权的助手也会继续运行。双击托盘图标可以重新打开；要彻底停止，请在托盘菜单里选「退出」。退出后原生授权结束，下次使用原生方式时需重新授权。开机自启默认关闭，可以按需要开启。"
       ],
       [
+        "记录能保存多久？可以自己改吗？",
+        [
+          "可以。在「设置 → 数据保留」里填写 1–365 的整数天数并保存。不用重启，下次成功采集时就会按新期限清理；下次打开程序也会记住你的选择。",
+          "缩短期限会删除较早的网络记录和提醒，之后再延长也无法找回。会话日志里的 token 计数单独处理，不受网络记录保留天数的控制。"
+        ]
+      ],
+      [
+        "怎么升级，才能保留之前的记录？",
+        [
+          "先从托盘菜单退出 Netwatch，备份 data/ 文件夹和 config.local.json。下载并完整解压新版本，替换程序文件时保留这两项。",
+          "升级不会自行改动原有的保留期限；想调整保存天数，再到「设置 → 数据保留」保存新的值。"
+        ]
+      ],
+      [
         "会保存或上传我的聊天内容吗？",
         [
           "Netwatch 不会把聊天正文、工具内容、命令行或凭据写进数据库，也不会回传使用数据。原生采集不读取通信正文、不解密 TLS，也不主动查询域名；连接目标显示为 IP。",
@@ -300,6 +328,7 @@ const copy = {
     "independent": "由 GloryPkqa 维护的独立开源项目，非 OpenAI 或 MetaCubeX 官方产品。",
     "fallbackNote": "下载按钮会打开 GitHub 的最新版本页面。请选择 Windows x64 ZIP，并下载同一版本的校验文件。"
   },
+
 
 };
 
