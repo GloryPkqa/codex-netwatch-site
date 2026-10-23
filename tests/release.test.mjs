@@ -40,7 +40,7 @@ for (const status of [403, 404, 429, 500]) test(`GitHub HTTP ${status} yields us
   for (const lang of ['en', 'zh-CN']) {
     const html = renderPage({ lang, origin: 'https://netwatch.pkqa.top', release: result });
     assert.ok(html.includes(`href="${LATEST}"`));
-    assert.ok(html.includes(lang === 'en' ? 'View latest release' : '查看最新发行版'));
+    assert.ok(html.includes(lang === 'en' ? 'View latest release' : '查看最新版本'));
     assert.ok(!html.includes('undefined'));
     assert.ok(!html.includes('<script'));
   }

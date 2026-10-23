@@ -28,8 +28,8 @@ API 限流、超时、无网络、数据无效、缺少 Windows ZIP 或校验文
 ## 目录
 
 - `src/page.mjs`：完整双语文案、HTML 模板、元信息。
-- `src/style.css`：本地字体栈、响应式样式、键盘焦点与减少动态效果支持。
-- `assets/`：附件原图与图标，未改动图片内容。
+- `src/style.css`：响应式样式、本地中文字体、键盘焦点与减少动态效果支持。
+- `assets/`：英文原图、中文产品演示截图、图标和本地字体。
 - `scripts/`：无依赖构建、发行信息解析、静态检查、本地预览。
 - `tests/`：Latest 资产选择和异常回退测试。
 - `dist/`：可以直接部署的静态成品，含双语页面、资源、SEO 文件、安全响应头与发行快照。
@@ -37,6 +37,8 @@ API 限流、超时、无网络、数据无效、缺少 Windows ZIP 或校验文
 - `docs/DEPLOYMENT.md`：独立项目部署、DNS、验证和回滚说明。
 - `docs/nginx.conf.example`：仅针对子域名的虚拟主机示例。
 - `docs/VALIDATION.md`：交接时的历史本地检查记录，线上验收另行记录。
+- `docs/FONTS.md`：中文字体来源、许可证与子集维护方法。
+- `docs/CHINESE-SCREENSHOTS.md`：中文演示截图的来源与采集模式。
 
 ## 更新与迁移
 
@@ -55,4 +57,4 @@ node scripts/build.mjs
 
 仅接受 HTTPS origin，不能包含子路径、查询或认证信息。页面设计为独立域名根路径部署。
 
-许可证见 `LICENSE`。原始素材与产品归 GloryPkqa 项目所有，按附带 MIT 许可证交付。
+项目许可证见 `LICENSE`。本地 Noto Sans SC 字体遵循 SIL Open Font License 1.1，完整许可证随 `assets/fonts/OFL.txt` 交付。
