@@ -36,6 +36,7 @@ for (const [lang, route] of [['en', '/'], ['zh-CN', '/zh-CN/']]) {
   for (const value of ['rel="canonical"', 'hreflang="en"', 'hreflang="zh-CN"', 'hreflang="x-default"', 'og:image', 'twitter:card', 'Windows', 'WebView2', 'Mihomo', 'SHA256SUMS.txt', 'GloryPkqa', 'MetaCubeX']) assert.ok(html.includes(value), `${lang}: missing ${value}`);
   assert.ok(!/<script|<iframe|<form|https?:\/\/(?:127\.0\.0\.1|localhost)|undefined/i.test(html));
   assert.ok(html.includes('http-equiv="Content-Security-Policy"'), 'Missing Pages meta CSP');
+  assert.ok(html.includes("font-src 'self'"), 'Missing local-font CSP permission');
   const release = JSON.parse(await readFile(path.join(root, 'release.json'), 'utf8'));
   if (release.status === 'verified') assert.ok(html.includes(release.version), 'Verified version missing');
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
@@ -60,5 +61,5 @@ for (const [lang, route] of [['en', '/'], ['zh-CN', '/zh-CN/']]) {
     }
   }
 }
-for (const f of ['robots.txt', 'sitemap.xml', '_headers', '404.html', 'release.json', 'LICENSE']) await access(path.join(root, f));
+for (const f of ['robots.txt', 'sitemap.xml', '_headers', '404.html', 'release.json', 'LICENSE', '.nojekyll']) await access(path.join(root, f));
 console.log(`PASS: bilingual static pages, metadata, ${checked} link/resource references, image dimensions, no browser JS or local-controller requests.`);

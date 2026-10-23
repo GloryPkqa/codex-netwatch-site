@@ -4,6 +4,15 @@
 
 默认英文 `/`，完整中文 `/zh-CN/`。独立静态介绍与下载站，与 pkqa.top 原站的导航、登录、数据和后端没有集成。
 
+## 当前产品定位
+
+Codex Netwatch 是 Codex 的本地网络活动监控，同时支持直连与代理。Windows 原生采集通过经用户授权的 ETW 助手记录 TCP/UDP、IPv4/IPv6 及采样间关闭的短连接；Mihomo / Clash 兼容控制器是另一种可选来源，并非必需。
+
+默认 Automatic 使用可用且已授权的原生助手，否则尝试 Mihomo；也可手动固定 Windows native 或 Mihomo。只有助手通过正常 UAC 提升，整个应用不提权。退出采集程序后授权结束，下次运行可再次授权；开机自启不会自动弹 UAC，不安装服务、驱动或计划任务。
+
+同一采样不叠加 ETW 与代理计数。原生包括回环进程活动，目标显示 IP，不主动查询域名或收集通信正文。切换和丢事件留下缺口，历史可能包含不同统计口径，不补算离线流量。会话 GB、日志 token、网卡总流量和账单仍需区分。文案边界与依据见 [docs/NATIVE-CAPTURE.md](docs/NATIVE-CAPTURE.md)。
+
+
 ## 本地运行
 
 需要 Node.js 22+，建议 Node.js 24 LTS。**没有第三方依赖，不需要安装步骤或 npm。**
@@ -23,7 +32,7 @@ node scripts/serve.mjs
 node scripts/build.mjs --offline
 ```
 
-API 限流、超时、无网络、数据无效、缺少 Windows ZIP 或校验文件时，生成完整页面，版本显示“View latest release / 查看最新发行版”，下载和校验入口退回 Releases。不会复用旧版本号冒充 Latest。正常响应严格按文件名选择资产，下载使用稳定 `/releases/latest/download/codex-netwatch-windows-x64.zip`。
+API 限流、超时、无网络、数据无效、缺少 Windows ZIP 或校验文件时，生成完整页面，版本显示“View latest release / 查看最新版本”，下载和校验入口退回 Releases。不会复用旧版本号冒充 Latest。正常响应严格按文件名选择资产，下载使用稳定 `/releases/latest/download/codex-netwatch-windows-x64.zip`。
 
 ## 目录
 
@@ -36,7 +45,7 @@ API 限流、超时、无网络、数据无效、缺少 Windows ZIP 或校验文
 - `.github/workflows/deploy-pages.yml`：测试、构建和 GitHub Pages 发布。
 - `docs/DEPLOYMENT.md`：独立项目部署、DNS、验证和回滚说明。
 - `docs/nginx.conf.example`：仅针对子域名的虚拟主机示例。
-- `docs/VALIDATION.md`：交接时的历史本地检查记录，线上验收另行记录。
+- `docs/VALIDATION.md`：本轮原生采集定位更新的实际验证结果与历史记录。
 - `docs/FONTS.md`：中文字体来源、许可证与子集维护方法。
 - `docs/CHINESE-SCREENSHOTS.md`：中文演示截图的来源与采集模式。
 
