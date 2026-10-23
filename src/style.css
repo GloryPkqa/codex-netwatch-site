@@ -58,3 +58,6 @@ details[open] summary{color:var(--green)}
   .trust-strip{gap:12px}.trust-strip>span>span{margin-right:2px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.feature:hover,.button:hover{transform:none}}
+
+/* Keep longer FAQ answers easy to scan. */
+details p:not(:last-child){padding-bottom:12px}

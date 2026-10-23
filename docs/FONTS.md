@@ -5,8 +5,8 @@
 - 来源：Google Fonts 官方仓库 https://github.com/google/fonts/tree/main/ofl/notosanssc
 - 上游文件：`NotoSansSC[wght].ttf`。
 - 许可证：SIL Open Font License 1.1，完整文本位于 `assets/fonts/OFL.txt`，发布时一并保留。
-- 成品：`assets/fonts/netwatch-sans-sc.woff2`，126,460 字节。
-- 本次子集包含页面所需的 533 个 Unicode 码位，保留可变字重；来源和成品 SHA-256 记录于 `scripts/font-coverage.json`。
+- 成品：`assets/fonts/netwatch-sans-sc.woff2`，123,336 字节。
+- 本次子集包含页面所需的 519 个 Unicode 码位，保留可变字重；来源和成品 SHA-256 记录于 `scripts/font-coverage.json`。
 - `font-display: swap`；中文页预加载字体；字体不可用时回落到系统中文无衬线字体。
 
 ## 修改中文文案之后

@@ -111,103 +111,148 @@ const copy = {
     fallbackNote: 'Downloads and checksums are available on GitHub Releases. Open the latest release to choose the Windows x64 ZIP.',
   },
   'zh-CN': {
-    title: "Codex Netwatch — 在本机看清 Codex 的网络活动，支持直连与代理",
-    description: "在 Windows 本机查看 Codex 的上传下载、进程和连接。授权 Windows 原生助手即可采集直连 TCP/UDP，也可使用 Mihomo 兼容控制接口。",
-    skip: '跳至正文', nav: ['界面概览', '核心功能', '开始使用', '常见问题'],
-    eyebrow: "直连或代理，按你的用法来", headline: "看清 Codex 的<br><em>网络活动。</em>",
-    intro: "直连也好，走代理也好，都可以在本机查看。把上传下载、进程和连接放到一起，排查时少一点猜测。",
-    download: '下载 Windows 版', github: '看看项目源码',
-    requirement: "Windows 10/11 x64 · 原生采集需 Windows 授权 · 代理可选",
-    release: '最新正式版', fallback: '查看最新版本', strip: ['数据留在本机', '无遥测', 'MIT 开源'],
-    previewLabel: '01 / 先看一眼', previewTitle: '上传、下载和趋势，一页看清。',
-    previewText: "先看上传、下载和变化趋势，再缩小时间范围，或导出 CSV 继续分析。下图保留的是旧版 Mihomo 界面。",
-    full: '查看完整原图', dashboardAlt: "Codex Netwatch 旧版 Mihomo 中文总览，使用合成数据展示流量历史和进程排行，并非原生直连实测",
-    featuresLabel: '02 / 能帮你看什么', featuresTitle: '想知道的，<br>不只是用了多少流量。',
-    features: [
-  [
-    "直连、代理都能看",
-    "不走代理时，用 Windows 原生采集看 TCP/UDP、IPv4/IPv6 和采样间关闭的短连接；也可以接入 Mihomo，沿用现有代理。"
-  ],
-  [
-    "哪个进程在用",
-    "有可靠进程证据，才把流量归到 Codex 和它的子进程。需要对比时，也能查看其他已观测进程；归属不明的流量不会混进 Codex 总量。"
-  ],
-  [
-    "连接去了哪里",
-    "查看目标地址，找到突发上传、下载和持续上传的时段。原生模式显示目标 IP，不主动查询域名；采集空档也会留下记录。"
-  ],
-  [
-    "当时在做什么",
-    "对照会话活动和本地日志里的 token 计数，回看当时的情况。它们与网络字节各自独立，不能用来精确分摊每段对话的流量。"
-  ]
-],
-    investigationLabel: '发现变化之后', investigationTitle: '发现一次突增，<br>就从这里查起。',
-    investigationText: "先找到流量变化的时段，再看目标地址和进程记录。排查时也看看当前采集来源：原生事件与 Mihomo 快照的统计口径不同，切换留下的缺口会保留。",
-    demo: "旧版 Mihomo 排查界面 · 合成演示", investigationAlt: "旧版 Mihomo 异常排查界面的合成演示，并非 Windows 原生直连实测",
-    localTitle: '这些记录，留在你的电脑上。', localText: '采集记录保存在本机，应用没有遥测。关掉窗口后，也可以留在托盘继续记录；需要时再打开看。支持桌面窗口和本地浏览器，界面可选中英文，首次启动默认英文。',
-    stepsLabel: '03 / 开始使用', stepsTitle: "打开 Netwatch，选一种采集方式。",
-    steps: [
-  [
-    "下载后，完整解压",
-    "在同一个版本下下载 Windows x64 ZIP 和 SHA256SUMS.txt。核对 SHA-256 后，把整个压缩包解压到有写入权限的文件夹。"
-  ],
-  [
-    "打开设置，选择来源",
-    "运行 Codex-Netwatch.exe 和 Codex。默认「自动」会优先使用可用且已授权的原生助手，否则尝试 Mihomo；也可以手动选定「Windows 原生」或「Mihomo」。"
-  ],
-  [
-    "授权后，发一条请求",
-    "看直连流量时，点击「授权原生采集」，按 Windows 管理员提示完成本次授权。使用 Mihomo 则先检查「连接帮助」。再向 Codex 发一条新请求，查看新增活动；Mihomo 首次接入会先记下初始值。"
-  ]
-],
-    config: '查看配置与排错说明', checksum: 'SHA-256 校验文件',
-    compatibility: '下载前，确认这几项', requirements: "需要 Windows 10/11 x64、.NET Framework 4.8 和 Microsoft Edge WebView2 Runtime。便携包已带上 Node.js 与原生助手，代理不是必需项。目前 Windows 程序还没有数字签名，请用同一版本的校验文件核对 ZIP。",
-    limit: '看数字前，先了解统计范围', limits: "原生采集记录 ETW 进程网络事件，包含回环活动和采样间关闭的短连接；Mihomo 根据控制器快照统计，短连接及关闭前的流量可能漏记。每次采样只用一种来源，不叠加两边的计数。切换来源或丢失事件会留下缺口，离线流量不会补算，历史也可能包含不同统计口径。这些数字不是网卡总流量或 VPN 账单。连续运行 24 / 72 小时的验证仍未完成。",
-    faqLabel: '04 / 你可能还想知道', faqTitle: '遇到问题，<br>先看看这里。',
-    faqs: [
-  [
-    "一定要开代理或 VPN 吗？",
-    "不用。授权 Windows 原生助手后，可以直接采集 TCP/UDP 网络活动，不需要代理或控制器。如果习惯走代理，也可以选择 Mihomo / Clash 兼容的本地控制接口。并不是所有 VPN 都提供这种接口；配置时填控制接口端口，别填成 HTTP / SOCKS 代理端口。"
-  ],
-  [
-    "「自动」会怎么选？会重复算流量吗？",
-    "默认「自动」会使用可用且已授权的 Windows 原生助手，否则尝试 Mihomo；设置里也能手动固定其中一种。一次采样只用一个来源，不会把 ETW 和代理流量相加。切换或丢失事件会留下缺口，同一段历史里也可能包含不同来源的统计。"
-  ],
-  [
-    "原生采集为什么要授权？每次都要吗？",
-    "点击「授权原生采集」后，Windows 会弹出正常的管理员确认。只提升采集助手，看板和会话读取部分不会提权。退出采集程序后，这次授权就结束了，下次运行可再次授权。开机自启和后台重试不会自行弹出 UAC；程序不安装服务、驱动或计划任务，也不绕过系统安全确认。"
-  ],
-  [
-    "为什么流量还是 0？",
-    "先看设置和「连接帮助」里的实际采集来源。原生模式要有已授权且正在运行的助手，也要能可靠识别对应进程；Mihomo 模式则检查地址、密钥、接口响应，以及 Codex 是否经过这个代理。再发一条新请求。Mihomo 刚连接或重连时会先记初始值，丢失的事件和离线流量不会补算。"
-  ],
-  [
-    "这些数字就是上网流量或 VPN 账单吗？",
-    "不是。原生采集包含进程的回环和套接字活动，连向本地代理、进程之间的通信也可能在内；全进程对照还可能包含本地连接的两端。Mihomo 只看到控制接口覆盖的部分。两种方式都不能当作精确的网卡总流量、互联网账单或 VPN 加密后的传输字节。"
-  ],
-  [
-    "关掉窗口，还会继续记录吗？",
-    "会，程序会留在系统托盘，采集和已经授权的助手继续运行。双击托盘图标就能打开；想彻底停止时，在托盘菜单里选「退出」，原生授权也随之结束。开机自启默认关闭，可以按需要开启。"
-  ],
-  [
-    "会查看或上传我的聊天内容吗？",
-    "Netwatch 没有应用遥测，记录保存在本机。原生采集只记录进程网络事件和目标 IP，不截获通信正文、不解密 TLS，也不主动查域名。数据库会保留目标地址、进程标识、会话信息、token 和活动时间，但不写入聊天正文、工具内容、命令行或凭据。请妥善保管数据库、配置和原始 CSV；这个介绍网页也不会连接你电脑上的监控程序。"
-  ],
-  [
-    "能看出每段对话用了多少 GB 吗？",
-    "目前不能精确统计。不同会话可能共用进程和连接，无法把流量准确分开。会话活动可以帮助你对照时间，但不能证明某段流量就属于那段对话。"
-  ],
-  [
-    "这里的 token 是我的剩余额度吗？",
-    "不是。这里读的是本地日志中的 token 计数，与网络字节各自独立。它不能用来推算订阅剩余额度、账单或官方计费用量，也不能换算成 GB。"
-  ]
-],
-    downloadLabel: '开源免费 · 在本机运行', downloadTitle: '下次流量变多，<br>有记录可查。',
-    downloadText: "启动 Netwatch，选好采集来源，再照常使用 Codex。需要排查时，就能回看这段时间留下的记录。",
-    notes: '看看更新了什么', issues: '反馈问题', docs: '配置文档', readme: '中文说明', source: '项目源码', license: 'MIT 许可证',
-    independent: 'GloryPkqa 维护的独立社区项目，与 OpenAI、MetaCubeX 无官方隶属关系。',
-    fallbackNote: '下载按钮会打开 GitHub 的最新版本页面，请选择 Windows x64 ZIP，并下载同一版本的校验文件。',
+    "title": "Codex Netwatch — 查看 Codex 的流量变化与连接记录",
+    "description": "在 Windows 本机查看 Codex 的上传下载、流量趋势和连接记录。按时间回看，排查异常，数据保存在自己的电脑上。",
+    "skip": "跳到正文",
+    "nav": [
+      "界面预览",
+      "核心功能",
+      "开始使用",
+      "常见问题"
+    ],
+    "eyebrow": "Codex 的本地流量记录工具",
+    "headline": "看清 Codex 的<br><em>网络活动。</em>",
+    "intro": "在自己的电脑上查看 Codex 的上传下载、进程和连接记录。哪段时间流量变多了，回头也能查。",
+    "download": "下载 Windows 版",
+    "github": "查看源码",
+    "requirement": "Windows 10/11 x64 · 便携版，完整解压后运行",
+    "release": "最新正式版",
+    "fallback": "查看最新版本",
+    "strip": [
+      "记录保存在本机",
+      "不上传使用数据",
+      "MIT 开源"
+    ],
+    "previewLabel": "01 / 界面预览",
+    "previewTitle": "上传、下载和流量变化，一页看清。",
+    "previewText": "先看看上传、下载和历史曲线。想查某个时段，可以调整时间范围；需要进一步分析时，也能导出 CSV。",
+    "full": "查看大图",
+    "dashboardAlt": "Codex Netwatch 中文总览页，以合成数据展示流量趋势和进程排行；截图为旧版 Mihomo 代理采集界面",
+    "featuresLabel": "02 / 主要功能",
+    "featuresTitle": "流量变多了，<br>从这几处查起。",
+    "features": [
+      [
+        "哪段时间变多了",
+        "看上传、下载和实时速度，也能回看历史曲线。选定时间段，或导出 CSV，方便接着分析。"
+      ],
+      [
+        "哪些程序在用",
+        "看看 Codex 和它启动的程序各用了多少。只有能确认归属的流量才会计入；需要对比时，也能查看其他程序。"
+      ],
+      [
+        "连接去了哪里",
+        "查看连接的目标地址，找出突然增加的上传、下载或持续上传。采集中断的时段也会标出来。"
+      ],
+      [
+        "当时在做什么",
+        "把会话活动时间和流量曲线放在一起看，帮助回想当时的操作。日志里的 token 仅作参考，不能拿来换算流量。"
+      ]
+    ],
+    "investigationLabel": "发现异常之后",
+    "investigationTitle": "流量突然升高，<br>先回看那段记录。",
+    "investigationText": "先找到流量变多的那段时间，再看连接地址和进程记录。更换采集方式或中途断开时，记录里会留下空档，不会补算没采集到的流量。",
+    "demo": "旧版 Mihomo 排查界面 · 合成数据演示",
+    "investigationAlt": "旧版 Mihomo 异常排查页，使用合成数据演示流量变化和连接记录，并非原生直连实测",
+    "localTitle": "记录留在自己的电脑上。",
+    "localText": "数据和界面都在本机，不会上传使用数据。关掉窗口后，程序会留在托盘继续记录；要彻底停止，请从托盘菜单退出。界面支持中文和英文，首次启动默认英文。",
+    "stepsLabel": "03 / 开始使用",
+    "stepsTitle": "第一次用，先做这三步。",
+    "steps": [
+      [
+        "下载并完整解压",
+        "在同一个版本下下载 Windows x64 ZIP 和 SHA256SUMS.txt。核对 SHA-256 后，把 ZIP 完整解压到有写入权限的文件夹。"
+      ],
+      [
+        "打开程序，检查设置",
+        "运行 Codex-Netwatch.exe 和 Codex。第一次使用，可以先保留默认的「自动」；需要固定采集方式时，再到设置里手动选择。"
+      ],
+      [
+        "确认授权，再发一条请求",
+        "使用 Windows 原生方式时，每次启动程序都要点击「授权原生采集」，并按 Windows 提示允许本次运行。使用 Mihomo 时，先按「连接帮助」检查配置。随后在 Codex 发起一个新请求，看看流量是否开始变化。"
+      ]
+    ],
+    "config": "查看配置说明",
+    "checksum": "SHA-256 校验文件",
+    "compatibility": "下载前，确认电脑能运行",
+    "requirements": "适用于 Windows 10/11 x64，需要 .NET Framework 4.8 和 Microsoft Edge WebView2 Runtime。便携包已包含 Node.js 和采集助手，不用另外安装。目前 Windows 程序还没有数字签名，请用同一版本的校验文件核对 ZIP。",
+    "limit": "这些数字代表什么",
+    "limits": "这里记录的是程序的网络活动，不是网卡总流量或 VPN 账单。同一时间只用一种采集方式，切换或漏记的部分会留下空档，不会补算；历史记录也可能采用不同的统计方法。原生记录包含本机内部通信，Mihomo 方式还可能漏掉短连接和断开前的部分流量。连续运行 24 / 72 小时的验证仍未完成。",
+    "faqLabel": "04 / 常见问题",
+    "faqTitle": "有疑问，<br>先看看这里。",
+    "faqs": [
+      [
+        "需要一直开着代理吗？",
+        "不需要。使用 Windows 原生方式并完成授权后，就能记录直接联网的 TCP/UDP 活动，支持 IPv4/IPv6，也能保留很快结束的连接。已有 Mihomo / Clash 兼容代理时，也可以用它的本地控制接口采集。代理方式要填控制接口端口，不是 HTTP / SOCKS 代理端口；普通 VPN 不一定提供这种接口。"
+      ],
+      [
+        "「自动」模式怎么选？会不会重复计算？",
+        "它会先用已经授权、能够正常运行的 Windows 原生助手；没有可用助手时，再尝试 Mihomo。也可以在设置里固定为「Windows 原生」或「Mihomo」。每次只取其中一种方式的记录，不会把两边相加。切换时会留下记录空档，前后的统计方法也可能不同。"
+      ],
+      [
+        "为什么要管理员授权？下次还要点吗？",
+        [
+          "Windows 需要管理员权限，才能提供原生采集所需的网络记录。每次启动程序后，如果要用这种方式，都需点击「授权原生采集」，并在 Windows 的确认窗口中允许本次运行。",
+          "只有采集助手获得管理员权限，主界面和读取会话的部分仍以普通权限运行。退出采集程序后，授权也随之结束。",
+          "开机自启和后台重试都不会自动弹出这个窗口；程序不安装服务、驱动或计划任务，也不会跳过系统确认。"
+        ]
+      ],
+      [
+        "开着程序，为什么还是 0？",
+        [
+          "先在设置和「连接帮助」里看看当前用的是哪种采集方式。使用 Windows 原生方式时，确认助手已经授权并正常运行；使用 Mihomo 时，检查接口地址、密钥、接口是否正常响应，以及 Codex 是否确实经过这个代理。",
+          "然后在 Codex 里发起一个新请求。程序还需要认出对应进程，流量才会计入 Codex。Mihomo 刚连接或重连时会先记下初始值，之后只累计新增流量；没采集到的部分不会补算。"
+        ]
+      ],
+      [
+        "这里的流量，和网卡或 VPN 账单一样吗？",
+        [
+          "不一样。Windows 原生方式会记录程序之间在本机内的通信，例如 Codex 连到本地代理；查看所有进程时，还可能同时看到连接两端的记录。Mihomo 只能统计控制接口能看到的部分。",
+          "所以，这些数字适合用来了解程序的网络活动，不能直接当成网卡总流量、实际上网流量或 VPN 加密后的传输量。"
+        ]
+      ],
+      [
+        "关掉窗口以后，还会继续记录吗？",
+        "会。关窗只是把程序收进系统托盘，记录还会继续，已经授权的助手也会继续运行。双击托盘图标可以重新打开；要彻底停止，请在托盘菜单里选「退出」。退出后原生授权结束，下次使用原生方式时需重新授权。开机自启默认关闭，可以按需要开启。"
+      ],
+      [
+        "会保存或上传我的聊天内容吗？",
+        [
+          "Netwatch 不会把聊天正文、工具内容、命令行或凭据写进数据库，也不会回传使用数据。原生采集不读取通信正文、不解密 TLS，也不主动查询域名；连接目标显示为 IP。",
+          "本地记录里仍会有目标地址、进程信息、会话信息、token 和活动时间。因此，数据库、配置文件和原始 CSV 仍应妥善保管，不要直接公开。这个介绍网页不会连接你电脑上的监控程序。"
+        ]
+      ],
+      [
+        "能算出每段对话用了多少 GB 吗？",
+        "目前不能精确算。不同对话可能共用进程和连接，流量没法一一分开。会话活动可以帮你对照时间、回想当时做了什么，但不能据此认定某段流量就属于某一段对话。"
+      ],
+      [
+        "这里的 token 代表剩余额度吗？",
+        "不是。这里显示的是本地日志里的 token 计数，和网络流量是两回事。它既不能换算成 GB，也不能用来推算订阅还剩多少额度、账单金额或官方计费用量。"
+      ]
+    ],
+    "downloadLabel": "开源免费 · 在本机运行",
+    "downloadTitle": "下次流量变多，<br>有记录可查。",
+    "downloadText": "设置好以后，照常使用 Codex。想查流量时，再打开 Netwatch 看看。",
+    "notes": "版本更新",
+    "issues": "反馈问题",
+    "docs": "使用文档",
+    "readme": "中文说明",
+    "source": "项目源码",
+    "license": "MIT 许可证",
+    "independent": "由 GloryPkqa 维护的独立开源项目，非 OpenAI 或 MetaCubeX 官方产品。",
+    "fallbackNote": "下载按钮会打开 GitHub 的最新版本页面。请选择 Windows x64 ZIP，并下载同一版本的校验文件。"
   },
+
 };
 
 export function renderPage({ lang, origin, release }) {
@@ -254,7 +299,7 @@ export function renderPage({ lang, origin, release }) {
   <section class="container section investigation" aria-labelledby="investigation-title"><div class="investigation-copy"><p class="eyebrow">${c.investigationLabel}</p><h2 id="investigation-title">${c.investigationTitle}</h2><p>${c.investigationText}</p>${link(REPOSITORY + '/blob/main/docs/CONFIGURATION.md', `${c.config} ${arrow}`, 'text-link')}</div><figure><div class="demo-label"><span class="status-dot" aria-hidden="true"></span>${c.demo}</div><a class="image-link" href="${investigation}" aria-label="${c.full}"><img src="${investigation}" alt="${c.investigationAlt}" width="${zh ? 1585 : 1280}" height="${zh ? 991 : 752}" loading="lazy"><span class="image-zoom">${zoomIcon}<span>${c.full}</span></span></a></figure></section>
   <aside class="container local-note"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="5" y="12" width="22" height="16" rx="3"/><path d="M10 12V9a6 6 0 0 1 12 0v3m-6 6v5"/></svg><div><h3>${c.localTitle}</h3><p>${c.localText}</p></div><span class="local-mark" aria-hidden="true">ON YOUR MACHINE.</span></aside>
   <section id="start" class="container section" aria-labelledby="start-title"><p class="eyebrow">${c.stepsLabel}</p><h2 id="start-title">${c.stepsTitle}</h2><ol class="steps">${c.steps.map(([title, text], i) => `<li><span class="step-index" aria-hidden="true">0${i+1}</span><h3>${title}</h3><p>${text}</p></li>`).join('')}</ol><div class="start-links">${link(REPOSITORY + '/blob/main/docs/CONFIGURATION.md', `${c.config} ${arrow}`)}${link(REPOSITORY + '/blob/main/docs/NATIVE_CAPTURE.md', `${zh ? '原生采集与授权说明' : 'Native capture & authorization'} ${arrow}`)}${link(release.checksumUrl, `${c.checksum} ${arrow}`)}</div><div class="boundaries"><div><h3>${c.compatibility}</h3><p>${c.requirements}</p></div><div><h3>${c.limit}</h3><p>${c.limits}</p></div></div></section>
-  <section id="faq" class="container section faq" aria-labelledby="faq-title"><div><p class="eyebrow">${c.faqLabel}</p><h2 id="faq-title">${c.faqTitle}</h2></div><div class="questions">${c.faqs.map(([q,a]) => `<details><summary>${q}<span class="plus" aria-hidden="true"></span></summary><p>${a}</p></details>`).join('')}</div></section>
+  <section id="faq" class="container section faq" aria-labelledby="faq-title"><div><p class="eyebrow">${c.faqLabel}</p><h2 id="faq-title">${c.faqTitle}</h2></div><div class="questions">${c.faqs.map(([q,a]) => `<details><summary>${q}<span class="plus" aria-hidden="true"></span></summary>${(Array.isArray(a) ? a : [a]).map(paragraph => `<p>${paragraph}</p>`).join('')}</details>`).join('')}</div></section>
   <section id="download" class="download-section" aria-labelledby="download-title"><div class="container download-inner"><p class="eyebrow">${c.downloadLabel}</p><h2 id="download-title">${c.downloadTitle}</h2><p>${c.downloadText}</p><div class="actions">${download()}${link(LATEST, `${c.notes} ${arrow}`, 'button secondary')}</div><p class="download-meta"><span>${release.version ? esc(release.version) : c.fallback}</span><span>Windows x64</span><span>MIT</span></p>${release.status === 'fallback' ? `<p class="fallback-note">${c.fallbackNote}</p>` : ''}<div class="download-links">${link(release.checksumUrl, c.checksum)}${link(REPOSITORY + '/issues', c.issues)}${link(REPOSITORY + '/blob/main/docs/CONFIGURATION.md', c.docs)}${link(REPOSITORY + '/blob/main/README.zh-CN.md', c.readme)}</div></div></section>
 </main>
 <footer class="container footer"><div class="footer-top"><a class="brand" href="${route}"><img src="/assets/icon.svg" alt="" width="26" height="26">Codex <span>Netwatch</span></a><div>${link('https://github.com/GloryPkqa', 'GloryPkqa')}${link(REPOSITORY, 'GitHub')}${link('/LICENSE', c.license)}</div></div><p>${c.independent}</p></footer>
