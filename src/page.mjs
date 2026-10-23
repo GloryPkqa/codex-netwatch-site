@@ -11,104 +11,152 @@ const featureIcons = [
 const zoomIcon = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M15 4h5v5M20 4l-7 7M9 20H4v-5m0 5 7-7"/></svg>';
 const copy = {
   en: {
-    title: "Codex Netwatch — Local network activity, with or without a proxy",
-    description: "Monitor Codex network activity locally on Windows. Capture direct TCP/UDP traffic with an authorized native helper, or use a Mihomo-compatible controller.",
-    skip: 'Skip to content', nav: ['Overview', 'Features', 'Get started', 'FAQ'],
-    eyebrow: "LOCAL NETWORK ACTIVITY / DIRECT + PROXY",
-    headline: "See your Codex<br> network <em>activity.</em>",
-    intro: "Monitor Codex network activity locally, with or without a proxy. See traffic history, processes and destinations in one place.",
-    download: 'Download for Windows', github: 'View on GitHub',
-    requirement: "Windows 10/11 x64 · Native capture needs Windows authorization · Proxy optional",
-    release: 'Latest release', fallback: 'View latest release',
-    strip: ['Local-first', 'No app telemetry', 'MIT licensed'],
-    previewLabel: '01 / THE OVERVIEW', previewTitle: 'Your traffic. A clearer picture.',
-    previewText: "Follow recorded uploads, downloads and history. Narrow a time range or export a CSV for a closer look. The image shows an earlier Mihomo interface.",
-    full: 'Open full-resolution image', dashboardAlt: "Earlier Codex Netwatch Mihomo dashboard with traffic history and process rankings; not a native-capture measurement",
-    featuresLabel: '02 / FOLLOW THE EVIDENCE', featuresTitle: 'From “how much?”<br>to “what happened?”',
-    features: [
-  [
-    "Direct, or through a proxy",
-    "Windows native capture covers TCP/UDP, IPv4/IPv6 and connections that close between polls. A Mihomo-compatible controller remains an alternative."
-  ],
-  [
-    "Processes with evidence",
-    "Identify Codex and its children only when process evidence supports the attribution. Compare other observed processes without including unknown ownership in Codex totals."
-  ],
-  [
-    "Connections in context",
-    "Inspect destinations, bursts, sustained uploads and collection gaps. Native capture shows destination IPs without looking up domains."
-  ],
-  [
-    "A separate activity trail",
-    "Compare session activity and local-log token counts with network history. They remain independent clues, not a way to divide bytes between conversations."
-  ]
-],
-    investigationLabel: 'LOOK A LITTLE CLOSER', investigationTitle: 'Give unusual traffic<br>a starting point.',
-    investigationText: "Start with a change in the chart, then inspect destinations and process evidence. Check the active source: native events and Mihomo snapshots measure traffic differently, and source changes remain visible as gaps.",
-    demo: "EARLIER MIHOMO DEMO · SYNTHETIC DATA", investigationAlt: "Earlier synthetic Mihomo investigation demo; not evidence of native direct-traffic capture",
-    localTitle: 'Stays on your machine.', localText: 'Local SQLite storage and local interface resources. No app telemetry. Use the Windows desktop window, keep collecting in the tray, or open the local browser interface. English and Chinese are supported; English is the default.',
-    stepsLabel: '03 / GET STARTED', stepsTitle: "Open Netwatch. Choose how to capture.",
-    steps: [
-  [
-    "Download & extract",
-    "Get the Windows x64 ZIP and SHA256SUMS.txt from the same release. Verify the checksum, then extract the entire archive into a writable folder."
-  ],
-  [
-    "Open Settings & choose a source",
-    "Run Codex-Netwatch.exe and Codex. Automatic is the default: it uses an available authorized native helper, otherwise tries Mihomo. You can also select Windows native or Mihomo explicitly."
-  ],
-  [
-    "Authorize, then make a request",
-    "For direct capture, click Authorize native capture and approve the Windows administrator prompt each run. For Mihomo, check Connection help. Send a new Codex request; collection records new activity, with a baseline on Mihomo attach."
-  ]
-],
-    config: 'Configuration & troubleshooting', checksum: 'SHA-256 checksums',
-    compatibility: 'Before you download', requirements: "Requires Windows 10/11 x64, .NET Framework 4.8 and Microsoft Edge WebView2 Runtime. The portable ZIP includes Node.js and the native helper. The Windows EXE is unsigned; verify the ZIP against the release checksums. A proxy is optional.",
-    limit: 'What the numbers mean', limits: "Native capture records ETW process network events, including loopback and short connections. Mihomo uses controller snapshots and can miss short connections or final bytes. Only one source is used per sample. Source changes and event loss leave gaps; offline traffic is not backfilled, and history can mix measurement methods. These are not network-adapter totals or a VPN bill. Continuous 24/72-hour validation is not complete.",
-    faqLabel: '04 / GOOD TO KNOW', faqTitle: 'A few things, made clear.',
-    faqs: [
-  [
-    "Do I need a proxy or VPN?",
-    "No. Windows native capture can record direct TCP/UDP traffic after you authorize the helper. If you prefer proxy capture, use a running Mihomo / Clash-compatible local controller. Not every VPN exposes one; use its controller port, not the HTTP / SOCKS proxy port."
-  ],
-  [
-    "How does Automatic choose a source?",
-    "Automatic is the default. It uses an available, authorized Windows native helper; otherwise it tries Mihomo. You can select either source explicitly in Settings. A sample uses one source, never ETW plus proxy totals. Source changes and lost events leave gaps, so a historical range may contain different measurement methods."
-  ],
-  [
-    "What does native authorization change?",
-    "Click Authorize native capture to open the normal Windows administrator prompt. Only the capture helper is elevated; the dashboard and session reader are not. Authorization ends when the collector exits and may be granted again next run. Startup at sign-in and background retries do not automatically prompt for elevation. Netwatch installs no service, driver or scheduled task and does not bypass Windows security confirmation."
-  ],
-  [
-    "Why is the traffic showing zero?",
-    "Check the active source in Settings and Connection help. Native mode needs a running authorized helper and reliable process evidence. In Mihomo mode, check the controller address, secret, response compatibility and whether Codex uses that proxy. Generate a new Codex request. Mihomo first establishes a baseline on attach or reconnect; missing events and offline traffic are not reconstructed."
-  ],
-  [
-    "Are these internet or VPN traffic totals?",
-    "No. Native capture includes process loopback/socket I/O, including local proxy or inter-process connections. The all-process comparison may include both ends of a local connection. Mihomo sees only its controller coverage. Neither source is an exact network-adapter total, internet bill or encrypted VPN wire-byte measurement."
-  ],
-  [
-    "Does closing the window stop collection?",
-    "Closing the window keeps the collector running in the tray, including an already authorized helper. Double-click the tray icon to reopen it; choose Exit to stop it fully and end native authorization. Start at login is optional and off by default."
-  ],
-  [
-    "Does it inspect or upload my chats?",
-    "No application telemetry is sent. Native capture records process network events and destination IPs; it does not collect communication bodies, decrypt TLS or actively look up domains. Observations stay local. The database includes destinations, process identities, session metadata, tokens and activity times, but not chat bodies, tool content, command lines or credentials. Keep the database, configuration and raw CSV private. This static website does not connect to your monitor."
-  ],
-  [
-    "Can it measure exact GB for each conversation?",
-    "No. Shared processes and connections cannot be split precisely into per-session GB. Session activity is a separate troubleshooting clue, not proof that a conversation owns particular bytes."
-  ],
-  [
-    "Are tokens my subscription balance or bill?",
-    "No. Token counts come from local logs and are independent of network bytes. They cannot be converted to GB, remaining subscription allowance, a bill or official billed usage."
-  ]
-],
-    downloadLabel: 'OPEN SOURCE / READY WHEN YOU ARE', downloadTitle: 'Make your traffic<br>a little less mysterious.',
-    downloadText: "Start Netwatch, choose a capture source and use Codex as usual. Keep a local history to return to when something changes.",
-    notes: 'Release notes', issues: 'Report an issue', docs: 'Documentation', readme: '中文说明', source: 'Source code', license: 'MIT license',
-    independent: 'An independent community project by GloryPkqa. Not an official OpenAI or MetaCubeX product.',
-    fallbackNote: 'Downloads and checksums are available on GitHub Releases. Open the latest release to choose the Windows x64 ZIP.',
+    "title": "Codex Netwatch — Track Codex network activity locally",
+    "description": "See Codex uploads, downloads, processes and connections on Windows. Review traffic over time and keep your records on your own computer.",
+    "skip": "Skip to content",
+    "nav": [
+      "Overview",
+      "Features",
+      "Get started",
+      "FAQ"
+    ],
+    "eyebrow": "A LOCAL NETWORK MONITOR FOR CODEX",
+    "headline": "Keep track of<br> Codex <em>traffic.</em>",
+    "intro": "See Codex uploads, downloads, processes and connections on your own computer. Keep a traffic history to review when something changes.",
+    "download": "Download for Windows",
+    "github": "View on GitHub",
+    "requirement": "Windows 10/11 x64 · Portable app · Extract the full ZIP to get started",
+    "release": "Latest release",
+    "fallback": "View latest release",
+    "strip": [
+      "Stored locally",
+      "No usage telemetry",
+      "MIT licensed"
+    ],
+    "previewLabel": "01 / OVERVIEW",
+    "previewTitle": "Your traffic. A clearer picture.",
+    "previewText": "Review upload and download activity over time. Choose a time range or export a CSV for a closer look. The screenshot shows an earlier Mihomo interface.",
+    "full": "View full-size image",
+    "dashboardAlt": "Earlier Codex Netwatch Mihomo dashboard showing traffic history and process rankings; not a Windows native capture result",
+    "featuresLabel": "02 / WHAT YOU CAN SEE",
+    "featuresTitle": "From “how much?”<br>to “what happened?”",
+    "features": [
+      [
+        "Traffic over time",
+        "See upload and download totals, current speeds and traffic history. Filter by time or export a CSV for a closer look."
+      ],
+      [
+        "Traffic by process",
+        "See traffic from Codex and the processes it starts. Only traffic that can be linked to Codex counts toward its total; you can also compare other recorded processes."
+      ],
+      [
+        "Connection details",
+        "Review connection destinations alongside traffic spikes and sustained uploads. Gaps are marked so you can see when collection was interrupted."
+      ],
+      [
+        "Session activity",
+        "Compare session activity with the traffic timeline. Token counts from local logs provide context, but cannot tell you how many bytes a conversation used."
+      ]
+    ],
+    "investigationLabel": "LOOK A LITTLE CLOSER",
+    "investigationTitle": "Look closer at<br> unexpected traffic.",
+    "investigationText": "Find the period where traffic changed, then review destinations and process activity. Changes in capture method or interruptions leave gaps; Netwatch does not reconstruct traffic it missed.",
+    "demo": "EARLIER MIHOMO DEMO · SYNTHETIC DATA",
+    "investigationAlt": "Earlier Mihomo investigation screen using synthetic data, not a Windows native capture result",
+    "localTitle": "Your records stay on your computer.",
+    "localText": "Records and interface files are stored locally, with no usage telemetry. Use the desktop window or the local browser interface. Closing the window keeps collection running in the system tray; choose Exit from the tray menu to stop it. The interface supports English and Chinese and opens in English by default.",
+    "stepsLabel": "03 / GET STARTED",
+    "stepsTitle": "Get started in three steps.",
+    "steps": [
+      [
+        "Download and extract",
+        "Download the Windows x64 ZIP and SHA256SUMS.txt from the same release. Verify the SHA-256 checksum, then extract the full ZIP into a folder you can write to."
+      ],
+      [
+        "Open the app and check Settings",
+        "Run Codex-Netwatch.exe and Codex. Leave the capture mode set to Automatic, or select a specific source in Settings."
+      ],
+      [
+        "Authorize capture, then make a request",
+        "For Windows native capture, click “Authorize native capture” and approve the Windows prompt each time you start Netwatch. For Mihomo, follow “Connection help”. Then send a new request in Codex and check for activity."
+      ]
+    ],
+    "config": "Configuration and troubleshooting",
+    "checksum": "SHA-256 checksums",
+    "compatibility": "Before you download",
+    "requirements": "Requires Windows 10/11 x64, .NET Framework 4.8 and Microsoft Edge WebView2 Runtime. The portable ZIP includes Node.js and the capture helper, so you do not need to install them separately. The Windows app is not digitally signed; verify the ZIP using the checksums from the same release.",
+    "limit": "What the numbers mean",
+    "limits": "These figures describe process activity, not network-adapter totals or a VPN bill. Netwatch uses one source at a time. Switching sources or losing events leaves gaps, and traffic missed while collection was stopped is not recovered. Historical records may use different measurement methods. Native capture includes local connections; Mihomo can miss short-lived connections or their final bytes. Continuous 24- and 72-hour validation runs have not been completed.",
+    "faqLabel": "04 / FAQ",
+    "faqTitle": "A few things<br> worth knowing.",
+    "faqs": [
+      [
+        "Do I need to keep a proxy running?",
+        [
+          "No. With an authorized Windows native helper, Netwatch can record TCP/UDP activity over IPv4 and IPv6, including short-lived connections. It uses Windows ETW network events.",
+          "If you already use Mihomo or a compatible Clash controller, you can use its local control API instead. Enter the controller port, not the HTTP or SOCKS proxy port. A regular VPN may not provide this API."
+        ]
+      ],
+      [
+        "How does Automatic mode choose a source?",
+        [
+          "Automatic uses the Windows native helper when it is authorized and available. Otherwise, it tries Mihomo. You can also choose either source in Settings.",
+          "Each sample uses just one source; the two totals are never added together. Switching sources or losing events leaves gaps, and a selected history range may include different measurement methods."
+        ]
+      ],
+      [
+        "Why does native capture ask for administrator access?",
+        [
+          "Windows requires administrator access for native network collection. Each time you start Netwatch, click “Authorize native capture” and approve the Windows prompt to allow native capture for that run.",
+          "Only the capture helper runs with administrator access. The dashboard and session-log reader continue to run with normal permissions. Authorization ends when you exit the collector; closing the window leaves it running in the tray.",
+          "Netwatch does not automatically request administrator access at sign-in or when retrying collection in the background. It does not install a service, driver or scheduled task, or bypass Windows confirmation."
+        ]
+      ],
+      [
+        "Why is the traffic showing zero?",
+        [
+          "Check the active source in Settings and “Connection help”. For Windows native capture, make sure the helper is authorized and running. For Mihomo, check the controller address and secret, confirm that the controller supports the expected API, and make sure Codex uses that proxy.",
+          "Then send a new request in Codex. Netwatch needs to identify the relevant process before its traffic can be included in Codex totals. Mihomo records a starting point when it connects or reconnects, then counts new traffic. Missed activity is not reconstructed."
+        ]
+      ],
+      [
+        "Do these numbers match my internet or VPN data usage?",
+        [
+          "No. Windows native capture includes traffic within your computer, such as connections to a local proxy. When you compare all processes, you may see records for both ends of a local connection. Mihomo only reports traffic visible to its controller.",
+          "Use these figures to understand process network activity. They should not be treated as network-adapter totals, billable internet usage or the amount of encrypted data sent by a VPN."
+        ]
+      ],
+      [
+        "Does closing the window stop collection?",
+        "No. Closing the window leaves Netwatch running in the system tray, along with any helper you have already authorized. Double-click the tray icon to reopen the window. To stop collection and end native authorization, choose Exit from the tray menu. Starting at sign-in is optional and off by default."
+      ],
+      [
+        "Does Netwatch store or upload my chats?",
+        [
+          "Netwatch does not write chat messages, tool inputs or outputs, command lines or credentials to its database, and it sends no usage telemetry. Native capture records process network activity and destination IP addresses. It does not capture network payloads, decrypt TLS traffic or actively look up domain names.",
+          "Local records still include destinations, process information, session metadata, token counts and activity times. Keep the database, configuration files and raw CSV exports private. This website does not connect to the Netwatch app on your computer."
+        ]
+      ],
+      [
+        "Can Netwatch measure data usage for each conversation?",
+        "Not precisely. Conversations can share processes and connections, so their traffic cannot be split into exact GB per conversation. Session activity can help you compare timings, but does not prove that particular traffic belongs to a conversation."
+      ],
+      [
+        "Do token counts show my remaining allowance?",
+        "No. These counts come from local logs and are separate from network traffic. They do not show your remaining subscription allowance or official billed usage. You cannot convert them into GB or use them to calculate a bill."
+      ]
+    ],
+    "downloadLabel": "OPEN SOURCE · RUNS ON YOUR COMPUTER",
+    "downloadTitle": "Have a record<br> when you need one.",
+    "downloadText": "Start Netwatch, finish setup and use Codex as usual. Leave it running in the tray to build a local history you can review later.",
+    "notes": "Release notes",
+    "issues": "Report an issue",
+    "docs": "Documentation",
+    "readme": "中文说明",
+    "source": "Source code",
+    "license": "MIT license",
+    "independent": "An independent community project by GloryPkqa. Not an official OpenAI or MetaCubeX product.",
+    "fallbackNote": "The download button opens the latest GitHub release. Choose the Windows x64 ZIP and download the checksum file from the same release."
   },
   'zh-CN': {
     "title": "Codex Netwatch — 查看 Codex 的流量变化与连接记录",

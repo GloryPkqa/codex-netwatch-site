@@ -48,6 +48,7 @@ API 限流、超时、无网络、数据无效、缺少 Windows ZIP 或校验文
 - `docs/VALIDATION.md`：本轮原生采集定位更新的实际验证结果与历史记录。
 - `docs/FONTS.md`：中文字体来源、许可证与子集维护方法。
 - `docs/CHINESE-COPY.md`：中文页面的表达习惯、信息层次与润色边界。
+- `docs/ENGLISH-COPY.md`：英文页面的表达习惯与润色边界。
 - `docs/CHINESE-SCREENSHOTS.md`：中文演示截图的来源与采集模式。
 
 ## 更新与迁移
